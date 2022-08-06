@@ -9,13 +9,10 @@ function App() {
   return (
     <Router>
       <div>
+        <Navigation />
         <Route path='/:type?'>
           <HomePage />
-        </Route>
-        
-          <Navigation />
-        
-        
+        </Route> 
       </div>
     </Router>
     
