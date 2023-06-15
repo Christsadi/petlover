@@ -2,33 +2,30 @@ import HomePage from './pages/home';
 import SearchPage from './pages/search';
 import PetDetailsPage from './pages/detail';
 import PetDetailsNotFound from './pages/petDetailsNotFound';
-import Navigation from './components/navigation';
-import { BrowserRouter as Router , Route, Switch} from 'react-router-dom';
+import Root from './components/root';
+
+// Add react-router-dom imports
+import { RouterProvider,
+         createBrowserRouter,
+         createRoutesFromElements,
+         Route } from 'react-router-dom';
+
+// create router with JSX Route elements
+const appRouter = createBrowserRouter(createRoutesFromElements(
+    <Route path='/' element={<Root/>}>
+      <Route index element={<HomePage/>}/>
+      <Route path=':type' element={<HomePage/>}/>
+      <Route path=':type/:id' element={<PetDetailsPage/>}/>
+      <Route path='search' element={<SearchPage/>}/>
+      <Route path='pet-details-not-found' element={<PetDetailsNotFound/>}/>
+    </Route>
+  )
+);
 
 function App() {
   return (
-    <Router>
-      <div>
-        <Navigation />
-          <Switch>
-            <Route path='/:type/:id'>
-              <PetDetailsPage />
-            </Route> 
-            <Route path='/search'>
-              <SearchPage />
-            </Route>  
-            <Route path='/pet-details-not-found'>
-              <PetDetailsNotFound />
-            </Route>
-            <Route path='/:type?'>
-              <HomePage />
-            </Route>
-            
-          </Switch>
-        
-      </div>
-    </Router>
-    
+    // replace below with a Router Provider
+    <RouterProvider router = {appRouter}/>
   );
 }
 
